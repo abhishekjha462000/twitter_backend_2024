@@ -1,19 +1,11 @@
 import express from 'express';
+import { getLikesv2, getLikesByIdv2 } from '../../controllers/likesController.js';
 
 const likesRoute = express();
 
-likesRoute.get('/', (req, res) => {
-    res.json({
-        message: 'Welcome to the likes page of the api v2',
-    })
-})
+likesRoute.get('/', getLikesv2);
 
-likesRoute.get('/:id', (req, res) => {
-    res.json({
-        message: `Welcome to the like v2 with id ${req.params.id}`,
-        id: req.params.id
-    });
-})
+likesRoute.get('/:id', getLikesByIdv2);
 
 
 export { likesRoute };

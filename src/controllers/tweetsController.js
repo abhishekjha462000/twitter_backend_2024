@@ -1,3 +1,4 @@
+import { createTweetService } from "../services/tweetService.js";
 
 const getAllTweets = (req, res) => {
     res.json({
@@ -15,5 +16,25 @@ const getTweetById = (req, res) => {
     });
 };
 
+const createTweet = async (req, res) => {
+    // this is the controller layer.
+    // use the service layer here
+    // const { body } = req.body;
+    console.log(req.body);
+    try {
+        const tweet = await createTweetService(req.body)
+        return res.json({
+            message: 'tweet created successfully',
+            success: true,
+            data: tweet
+        });
+    } catch (e) {
+        return res.status(500).json({
+            error: e,
+            success: false
+        });
+    }
+}
 
-export { getAllTweets, getTweetById };
+
+export { createTweet, getAllTweets, getTweetById };
